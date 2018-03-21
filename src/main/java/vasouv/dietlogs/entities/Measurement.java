@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.CreatedDate;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Measurement implements Serializable {
 
     @NotNull
     @Column(name = "measuredate")
+    @CreatedDate
     @Temporal(TemporalType.DATE)
     private Date measuredate;
 
@@ -42,7 +44,7 @@ public class Measurement implements Serializable {
     @ManyToOne
     private Person person;
 
-    private Measurement() {
+    public Measurement() {
     }
 
     public Measurement(Date measuredate, double weightkg, double bmi) {
