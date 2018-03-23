@@ -21,7 +21,7 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "person_id")
-    private Integer personID;
+    private Integer id;
 
     @NotNull
     @Size(min = 1, max = 150)
@@ -77,12 +77,12 @@ public class Person implements Serializable {
         this.allergies = allergies;
     }
 
-    public Integer getPersonID() {
-        return personID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPersonID(Integer personID) {
-        this.personID = personID;
+    public void setID(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

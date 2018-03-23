@@ -10,5 +10,7 @@ import vasouv.dietlogs.entities.Measurement;
  */
 @Repository
 public interface MeasurementRepository extends CrudRepository<Measurement, Integer> {
-    
+
+    Iterable<Measurement> findByPersonId(int id);
+
 }

@@ -11,13 +11,16 @@ import vasouv.dietlogs.repository.MeasurementRepository;
  */
 @Service
 public class MeasurementService {
-    
+
     @Autowired
     private MeasurementRepository measurementRepository;
-    
+
     public Iterable<Measurement> findAll() {
         return measurementRepository.findAll();
     }
-    
-    
+
+    public Iterable<Measurement> findByPersonID(int id) {
+        return measurementRepository.findByPersonId(id);
+    }
+
 }
