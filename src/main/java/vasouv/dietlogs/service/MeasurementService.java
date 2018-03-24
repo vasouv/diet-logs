@@ -23,4 +23,9 @@ public class MeasurementService {
         return measurementRepository.findByPersonId(id);
     }
 
+    public void addMeasurement(Measurement measurement) {
+        measurement.setId(measurementRepository.getMaxMeasurementID() + 1);
+        measurementRepository.save(measurement);
+    }
+
 }

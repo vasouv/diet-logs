@@ -25,7 +25,7 @@ import org.springframework.data.annotation.CreatedDate;
 public class Measurement implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "measure_id")
     private Integer id;
 
@@ -95,6 +95,11 @@ public class Measurement implements Serializable {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return "Measurement{" + "id=" + id + ", measuredate=" + measuredate + ", weightkg=" + weightkg + ", bmi=" + bmi + '}';
     }
 
 }
