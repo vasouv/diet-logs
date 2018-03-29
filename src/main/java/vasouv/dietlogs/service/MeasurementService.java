@@ -27,5 +27,9 @@ public class MeasurementService {
         measurement.setId(measurementRepository.getMaxMeasurementID() + 1);
         measurementRepository.save(measurement);
     }
+    
+    public void removeMeasurement(int id){
+        measurementRepository.deleteById(id);
+    }
 
 }
