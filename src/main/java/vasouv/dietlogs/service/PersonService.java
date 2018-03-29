@@ -24,4 +24,9 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
+    public void createPerson(Person person) {
+        person.setID(personRepository.getMaxMeasurementID() + 1);
+        personRepository.save(person);
+    }
+
 }
