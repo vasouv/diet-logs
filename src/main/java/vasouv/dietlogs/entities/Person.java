@@ -25,12 +25,12 @@ public class Person implements Serializable {
 
     @NotNull
     @Size(min = 1, max = 150)
-    @Column(name = "fname")
+    @Column(name = "full_name")
     private String name;
 
     @NotNull
     @Size(min = 1, max = 150)
-    @Column(name = "address")
+    @Column(name = "home_address")
     private String address;
 
     @NotNull
