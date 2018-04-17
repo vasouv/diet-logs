@@ -1,10 +1,7 @@
 package vasouv.dietlogs.entities;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,10 +13,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "persons")
-public class Person implements Serializable {
+public class Person {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id")
     private Integer id;
 
@@ -65,7 +61,8 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String name, String address, String phone, int age, double height, double targetkg, String illness, String medication, String allergies) {
+    public Person(String name, String address, String phone, int age, double height, double targetkg, String illness,
+            String medication, String allergies) {
         this.name = name;
         this.address = address;
         this.phone = phone;
