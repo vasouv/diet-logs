@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vasouv.dietlogs.entities.Person;
+import vasouv.dietlogs.repository.AppointmentRepository;
 import vasouv.dietlogs.repository.MeasurementRepository;
 import vasouv.dietlogs.repository.PersonRepository;
 
@@ -19,6 +20,9 @@ public class PersonService {
 
     @Autowired
     private MeasurementRepository measurementRepository;
+    
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
     public Iterable<Person> findAll() {
         return personRepository.findAll();
@@ -35,6 +39,7 @@ public class PersonService {
 
     public void deletePerson(int id) {
         measurementRepository.deleteAll(measurementRepository.findByPersonId(id));
+        appointmentRepository.delete(appointmentRepository.findByPersonId(id));
         personRepository.deleteById(id);
     }
 
