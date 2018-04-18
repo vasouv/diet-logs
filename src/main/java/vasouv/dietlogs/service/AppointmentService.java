@@ -29,4 +29,9 @@ public class AppointmentService {
         return appointmentRepository.findByPersonId(id);
     }
 
+    public void createAppointment(Appointment appointment) {
+        appointment.setId(appointmentRepository.getMaxAppointmentID() + 1);
+        appointmentRepository.save(appointment);
+    }
+
 }

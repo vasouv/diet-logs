@@ -1,5 +1,6 @@
 package vasouv.dietlogs.controller;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,10 @@ import vasouv.dietlogs.entities.Appointment;
 import vasouv.dietlogs.service.AppointmentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import vasouv.dietlogs.entities.Person;
+import vasouv.dietlogs.service.PersonService;
 
 /**
  * @author vasouv
@@ -20,6 +25,9 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private PersonService personService;
 
     @GetMapping
     public Iterable<Appointment> findAllAppointments() {
@@ -42,4 +50,18 @@ public class AppointmentController {
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
+    @PostMapping("/persons/{personID}/appointment")
+    public ResponseEntity<?> createAppointment(@RequestBody Appointment appointment, @PathVariable int personID) {
+        LocalDate today = LocalDate.now();
+        LocalDate appointmentDate = appointment.getAppointmentDate();
+
+        if (appointmentDate.isBefore(today)) {
+            return new ResponseEntity<>("Date cannot be before today", HttpStatus.NO_CONTENT);
+        }
+
+        appointment.setPerson(personService.findById(personID).get());
+        appointmentService.createAppointment(appointment);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
