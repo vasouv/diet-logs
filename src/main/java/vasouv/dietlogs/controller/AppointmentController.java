@@ -30,7 +30,7 @@ public class AppointmentController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping
+    @GetMapping("/appointments")
     public Iterable<Appointment> findAllAppointments() {
         return appointmentService.findAll();
     }
