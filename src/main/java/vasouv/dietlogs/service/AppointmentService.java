@@ -34,4 +34,8 @@ public class AppointmentService {
         appointmentRepository.save(appointment);
     }
 
+    public void removeAppointment(int id) {
+        appointmentRepository.deleteById(id);
+    }
+
 }
