@@ -1,5 +1,7 @@
 package vasouv.dietlogs.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,10 @@ public class AppointmentService {
 
     public Iterable<Appointment> findAll() {
         return appointmentRepository.findAll();
+    }
+
+    public Optional<Appointment> findByID(int id) {
+        return appointmentRepository.findById(id);
     }
 
 }
