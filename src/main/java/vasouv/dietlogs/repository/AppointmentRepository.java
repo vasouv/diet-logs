@@ -11,4 +11,6 @@ import vasouv.dietlogs.entities.Appointment;
 @Repository
 public interface AppointmentRepository extends CrudRepository<Appointment, Integer> {
 
+    Appointment findByPersonId(int id);
+
 }

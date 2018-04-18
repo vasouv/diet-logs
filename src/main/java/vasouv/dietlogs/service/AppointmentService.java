@@ -25,4 +25,8 @@ public class AppointmentService {
         return appointmentRepository.findById(id);
     }
 
+    public Appointment findByPersonID(int id) {
+        return appointmentRepository.findByPersonId(id);
+    }
+
 }

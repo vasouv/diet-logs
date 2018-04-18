@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import vasouv.dietlogs.entities.Appointment;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author vasouv
  */
 @RestController
-@RequestMapping("/appointments")
 public class AppointmentController {
 
     @Autowired
@@ -28,7 +26,7 @@ public class AppointmentController {
         return appointmentService.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/appointments/{id}")
     public ResponseEntity<Appointment> findAppointmentByID(@PathVariable int id) {
         Optional<Appointment> found = appointmentService.findByID(id);
         if (found.isPresent()) {
@@ -36,6 +34,12 @@ public class AppointmentController {
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/persons/{personID}/appointment")
+    public ResponseEntity<Appointment> findByPersonID(@PathVariable int personID) {
+        Appointment found = appointmentService.findByPersonID(personID);
+        return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
 }
