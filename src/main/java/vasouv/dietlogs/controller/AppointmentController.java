@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import vasouv.dietlogs.entities.Person;
 import vasouv.dietlogs.service.PersonService;
 
 /**
@@ -69,6 +68,16 @@ public class AppointmentController {
     @DeleteMapping("/appointments/{id}")
     public void removeAppointment(@PathVariable int id) {
         appointmentService.removeAppointment(id);
+    }
+
+    @GetMapping("/appointments/today")
+    public Iterable<Appointment> getTodaysAppointments() {
+        return appointmentService.todaysAppointments();
+    }
+
+    @GetMapping("/appointments/tomorrow")
+    public Iterable<Appointment> getTomorrowsAppointments() {
+        return appointmentService.tomorrowsAppointments();
     }
 
 }
