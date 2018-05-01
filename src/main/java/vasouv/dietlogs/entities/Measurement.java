@@ -29,7 +29,7 @@ public class Measurement {
     private Integer id;
 
     @NotNull
-    @Column(name = "measuredate")
+    @Column(name = "measure_date")
     @CreatedDate
     @Temporal(TemporalType.DATE)
     private Date measuredate;

@@ -1,7 +1,8 @@
 package vasouv.dietlogs.repository;
 
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import vasouv.dietlogs.entities.Measurement;
 
@@ -10,10 +11,11 @@ import vasouv.dietlogs.entities.Measurement;
  * @author vasou
  */
 @Repository
-public interface MeasurementRepository extends CrudRepository<Measurement, Integer> {
+public interface MeasurementRepository extends JpaRepository<Measurement, Integer> {
 
-    Iterable<Measurement> findByPersonId(int id);
-    
+    //Finds all measurements belonging to a person, duh
+    List<Measurement> findByPersonId(int id);
+
     @Query("select max(m.id) from Measurement m")
     int getMaxMeasurementID();
 
