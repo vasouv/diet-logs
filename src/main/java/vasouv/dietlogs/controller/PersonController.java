@@ -1,5 +1,6 @@
 package vasouv.dietlogs.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,28 +29,27 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public Iterable<Person> findAll() {
+    public List<Person> findAll() {
         return personService.findAll();
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Person> findById(@PathVariable int id) {
         Optional<Person> found = personService.findById(id);
-        if (found.isPresent()) {
-            return new ResponseEntity<>(found.get(), HttpStatus.OK);
-        } else {
+        if (!found.isPresent()) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(found.get(), HttpStatus.OK);
     }
 
     @PostMapping
     public void createPerson(@RequestBody Person person) {
-        personService.createPerson(person);
+        personService.create(person);
     }
 
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable int id) {
-        personService.deletePerson(id);
+        personService.delete(id);
     }
 
 }
