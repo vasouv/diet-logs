@@ -29,8 +29,12 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public List<Person> findAll() {
-        return personService.findAll();
+    public ResponseEntity<?> findAll() {
+        List<Person> all = personService.findAll();
+        if (all.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -43,12 +47,13 @@ public class PersonController {
     }
 
     @PostMapping
-    public void createPerson(@RequestBody Person person) {
-        personService.create(person);
+    public ResponseEntity<Person> create(@RequestBody Person person) {
+        Person saved = personService.create(person);
+        return new ResponseEntity<>(saved,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
         personService.delete(id);
     }
 

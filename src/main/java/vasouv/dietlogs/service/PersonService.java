@@ -33,9 +33,10 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
-    public void create(Person person) {
+    public Person create(Person person) {
         person.setID(personRepository.getMaxMeasurementID() + 1);
-        personRepository.save(person);
+        Person saved = personRepository.save(person);
+        return saved;
     }
 
     public void delete(int id) {
