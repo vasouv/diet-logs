@@ -41,7 +41,7 @@ public class PersonService {
 
     public void delete(int id) {
         measurementRepository.deleteAll(measurementRepository.findByPersonId(id));
-        appointmentRepository.delete(appointmentRepository.findByPersonId(id));
+        appointmentRepository.delete(appointmentRepository.findByPersonId(id).get());
         personRepository.deleteById(id);
     }
 

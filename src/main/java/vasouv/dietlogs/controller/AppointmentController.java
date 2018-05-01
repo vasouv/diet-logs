@@ -1,6 +1,7 @@
 package vasouv.dietlogs.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,12 @@ public class AppointmentController {
     private PersonService personService;
 
     @GetMapping("/appointments")
-    public Iterable<Appointment> findAllAppointments() {
-        return appointmentService.findAll();
+    public ResponseEntity<?> findAllAppointments() {
+        List<Appointment> all = appointmentService.findAll();
+        if (all.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("/appointments/{id}")
@@ -46,7 +51,7 @@ public class AppointmentController {
 
     @GetMapping("/persons/{personID}/appointment")
     public ResponseEntity<Appointment> findByPersonID(@PathVariable int personID) {
-        Appointment found = appointmentService.findByPersonID(personID);
+        Appointment found = appointmentService.findByPersonID(personID).get();
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
@@ -60,23 +65,23 @@ public class AppointmentController {
         }
 
         appointment.setPerson(personService.findById(personID).get());
-        appointmentService.createAppointment(appointment);
+        Appointment saved = appointmentService.create(appointment);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/appointments/{id}")
     public void removeAppointment(@PathVariable int id) {
-        appointmentService.removeAppointment(id);
+        appointmentService.remove(id);
     }
 
-    @GetMapping("/appointments/today")
-    public Iterable<Appointment> getTodaysAppointments() {
+    @GetMapping("/appointmentsByDay/today")
+    public List<Appointment> getTodaysAppointments() {
         return appointmentService.todaysAppointments();
     }
 
-    @GetMapping("/appointments/tomorrow")
-    public Iterable<Appointment> getTomorrowsAppointments() {
+    @GetMapping("/appointmentsByDay/tomorrow")
+    public List<Appointment> getTomorrowsAppointments() {
         return appointmentService.tomorrowsAppointments();
     }
 
