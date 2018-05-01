@@ -1,5 +1,6 @@
 package vasouv.dietlogs.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class PersonService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public Iterable<Person> findAll() {
+    public List<Person> findAll() {
         return personRepository.findAll();
     }
 
@@ -32,14 +33,15 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
-    public void createPerson(Person person) {
+    public Person create(Person person) {
         person.setID(personRepository.getMaxMeasurementID() + 1);
-        personRepository.save(person);
+        Person saved = personRepository.save(person);
+        return saved;
     }
 
-    public void deletePerson(int id) {
+    public void delete(int id) {
         measurementRepository.deleteAll(measurementRepository.findByPersonId(id));
-        appointmentRepository.delete(appointmentRepository.findByPersonId(id));
+        appointmentRepository.delete(appointmentRepository.findByPersonId(id).get());
         personRepository.deleteById(id);
     }
 

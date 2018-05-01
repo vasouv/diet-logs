@@ -20,7 +20,7 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public Iterable<Appointment> findAll() {
+    public List<Appointment> findAll() {
         return appointmentRepository.findAll();
     }
 
@@ -28,24 +28,25 @@ public class AppointmentService {
         return appointmentRepository.findById(id);
     }
 
-    public Appointment findByPersonID(int id) {
+    public Optional<Appointment> findByPersonID(int id) {
         return appointmentRepository.findByPersonId(id);
     }
 
-    public void createAppointment(Appointment appointment) {
+    public Appointment create(Appointment appointment) {
         appointment.setId(appointmentRepository.getMaxAppointmentID() + 1);
-        appointmentRepository.save(appointment);
+        Appointment saved = appointmentRepository.save(appointment);
+        return saved;
     }
 
-    public void removeAppointment(int id) {
+    public void remove(int id) {
         appointmentRepository.deleteById(id);
     }
 
-    public Iterable<Appointment> todaysAppointments() {
+    public List<Appointment> todaysAppointments() {
         return appointmentsForSpecificDate(appointmentRepository.findAll(), LocalDate.now());
     }
 
-    public Iterable<Appointment> tomorrowsAppointments() {
+    public List<Appointment> tomorrowsAppointments() {
         return appointmentsForSpecificDate(appointmentRepository.findAll(), LocalDate.now().plusDays(1));
     }
 

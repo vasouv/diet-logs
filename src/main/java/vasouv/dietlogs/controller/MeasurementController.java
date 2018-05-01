@@ -1,6 +1,9 @@
 package vasouv.dietlogs.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,19 +30,24 @@ public class MeasurementController {
     private PersonService personService;
 
     @GetMapping
-    public Iterable<Measurement> findMeasurements(@PathVariable int id) {
-        return measurementService.findByPersonID(id);
+    public ResponseEntity<?> findMeasurements(@PathVariable int id) {
+        List<Measurement> personsMeasurements = measurementService.findByPersonID(id);
+        if (personsMeasurements.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(personsMeasurements, HttpStatus.OK);
     }
 
     @PostMapping
-    public void addMeasurement(@RequestBody Measurement measurement, @PathVariable int id) {
+    public ResponseEntity addMeasurement(@RequestBody Measurement measurement, @PathVariable int id) {
         measurement.setPerson(personService.findById(id).get());
-        measurementService.addMeasurement(measurement);
+        measurementService.add(measurement);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{mid}")
     public void removeMeasurement(@PathVariable int mid) {
-        measurementService.removeMeasurement(mid);
+        measurementService.remove(mid);
     }
 
 }

@@ -1,5 +1,6 @@
 package vasouv.dietlogs.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,28 +29,32 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public Iterable<Person> findAll() {
-        return personService.findAll();
+    public ResponseEntity<?> findAll() {
+        List<Person> all = personService.findAll();
+        if (all.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Person> findById(@PathVariable int id) {
         Optional<Person> found = personService.findById(id);
-        if (found.isPresent()) {
-            return new ResponseEntity<>(found.get(), HttpStatus.OK);
-        } else {
+        if (!found.isPresent()) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(found.get(), HttpStatus.OK);
     }
 
     @PostMapping
-    public void createPerson(@RequestBody Person person) {
-        personService.createPerson(person);
+    public ResponseEntity<Person> create(@RequestBody Person person) {
+        Person saved = personService.create(person);
+        return new ResponseEntity<>(saved,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable int id) {
-        personService.deletePerson(id);
+    public void delete(@PathVariable int id) {
+        personService.delete(id);
     }
 
 }
