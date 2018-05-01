@@ -15,6 +15,9 @@ public class MeasurementService {
 
     @Autowired
     private MeasurementRepository measurementRepository;
+    
+    @Autowired
+    private BMICalculator bMICalculator;
 
     public List<Measurement> findAll() {
         return measurementRepository.findAll();
@@ -26,6 +29,7 @@ public class MeasurementService {
 
     public void add(Measurement measurement) {
         measurement.setId(measurementRepository.getMaxMeasurementID() + 1);
+        measurement.setBmi(bMICalculator.calculate(measurement.getWeightkg(), measurement.getPerson().getHeight()));
         measurementRepository.save(measurement);
     }
     
