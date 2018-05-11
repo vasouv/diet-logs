@@ -16,7 +16,7 @@ public interface MeasurementRepository extends JpaRepository<Measurement, Intege
     //Finds all measurements belonging to a person, duh
     List<Measurement> findByPersonId(int id);
 
-    @Query("select max(m.id) from Measurement m")
+    @Query("select coalesce(max(m.id),0) from Measurement m")
     int getMaxMeasurementID();
 
 }

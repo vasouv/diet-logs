@@ -12,7 +12,7 @@ import vasouv.dietlogs.entities.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     
-    @Query("select max(p.id) from Person p")
+    @Query("select coalesce(max(p.id),0) from Person p")
     int getMaxMeasurementID();
     
 }
