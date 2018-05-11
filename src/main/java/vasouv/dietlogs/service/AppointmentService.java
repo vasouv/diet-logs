@@ -51,7 +51,7 @@ public class AppointmentService {
     }
 
     private List<Appointment> appointmentsForSpecificDate(Iterable<Appointment> appointments, LocalDate specificDate) {
-        List<Appointment> forSpecificDate = new ArrayList();
+        List<Appointment> forSpecificDate = new ArrayList<Appointment>();
         for (Appointment current : appointments) {
             if (current.getAppointmentDate().equals(specificDate)) {
                 forSpecificDate.add(current);

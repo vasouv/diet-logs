@@ -39,10 +39,10 @@ public class MeasurementController {
     }
 
     @PostMapping
-    public ResponseEntity addMeasurement(@RequestBody Measurement measurement, @PathVariable int id) {
+    public ResponseEntity<?> addMeasurement(@RequestBody Measurement measurement, @PathVariable int id) {
         measurement.setPerson(personService.findById(id).get());
         measurementService.add(measurement);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{mid}")

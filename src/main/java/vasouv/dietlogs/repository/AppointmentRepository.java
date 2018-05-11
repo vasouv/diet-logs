@@ -15,7 +15,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     Optional<Appointment> findByPersonId(int id);
 
-    @Query("select max(a.id) from Appointment a")
+    @Query("select coalesce(max(a.id),0) from Appointment a")
     int getMaxAppointmentID();
 
 }
