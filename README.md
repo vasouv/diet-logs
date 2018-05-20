@@ -2,9 +2,9 @@
 
 *Spring Boot 2.0 REST API*
 
----
-
 The dietitian can add their clients. For each client the dietitian can add measurements, mainly they weight for that measurement. The BMI is added automatically. The dietitian can also schedule the next appointment for each client, the appointment's date is after the current date.
+
+The UI will be done in Angular and be hosted in a different repository.
 
 ---
 
@@ -18,16 +18,19 @@ The dietitian can add their clients. For each client the dietitian can add measu
 | POST | /persons |
 | GET | /persons/{id} |
 | DELETE | /persons/{id} |
+| GET | /persons/{id}/measurements |
+| POST | /persons/{id}/measurements |
+| DELETE | /persons/{id}/measurements/{mid} |
+| GET | /persons/{id}/appointment |
+| POST | /persons/{id}/appointment |
+| GET | /appointments |
+| GET | /appointents/{id} |
+| DELETE | /appointments/{id} |
+| GET | /appointmentsByDay/today |
+| GET | /appointmentsByDay/tomorrow |
 
----
-
-## Clone a repository
-
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
-
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
-
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+## To-Do
+- [ ] Refactor controllers with sub-resources
+- [ ] Charts for measurements (Chart.js)
+- [ ] Entity FoodHabit for @OneToOne with Person
+- [ ] Some checks in POST, UPDATE, DELETE (if id exists etc)
