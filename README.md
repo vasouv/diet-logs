@@ -36,3 +36,4 @@ The UI will be done in Angular and be hosted in a different repository.
 - [ ] Some checks in POST, UPDATE, DELETE (if id exists etc)
 - [ ] Test the REST controllers for correct response entity
 - [ ] Error handling and exceptions
+- [ ] Docker Compose file for database
