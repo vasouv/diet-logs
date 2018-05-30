@@ -37,3 +37,4 @@ The UI will be done in Angular and be hosted in a different repository.
 - [ ] Test the REST controllers for correct response entity
 - [ ] Error handling and exceptions
 - [ ] Docker Compose file for database
+- [ ] Count methods for all entities, persons, measurements, appointments
