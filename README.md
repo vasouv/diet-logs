@@ -28,13 +28,3 @@ The UI will be done in Angular and be hosted in a different repository.
 | DELETE | /appointments/{id} |
 | GET | /appointmentsByDay/today |
 | GET | /appointmentsByDay/tomorrow |
-
-## To-Do
-- [ ] Refactor controllers with sub-resources
-- [ ] Charts for measurements (Chart.js)
-- [ ] Entity FoodHabit for @OneToOne with Person
-- [ ] Some checks in POST, UPDATE, DELETE (if id exists etc)
-- [ ] Test the REST controllers for correct response entity
-- [ ] Error handling and exceptions
-- [ ] Docker Compose file for database
-- [ ] Count methods for all entities, persons, measurements, appointments
