@@ -60,4 +60,8 @@ public class AppointmentService {
         return forSpecificDate;
     }
 
+    public int count() {
+        return (int) appointmentRepository.count();
+    }
+
 }

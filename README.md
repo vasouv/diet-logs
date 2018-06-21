@@ -20,11 +20,14 @@ The UI will be done in Angular and be hosted in a different repository.
 | DELETE | /persons/{id} |
 | GET | /persons/{id}/measurements |
 | POST | /persons/{id}/measurements |
+| GET | /persons/{id}/measurements/count |
 | DELETE | /persons/{id}/measurements/{mid} |
 | GET | /persons/{id}/appointment |
 | POST | /persons/{id}/appointment |
+| GET | /persons/count |
 | GET | /appointments |
-| GET | /appointents/{id} |
+| GET | /appointments/count |
+| GET | /appointments/{id} |
 | DELETE | /appointments/{id} |
 | GET | /appointmentsByDay/today |
 | GET | /appointmentsByDay/tomorrow |

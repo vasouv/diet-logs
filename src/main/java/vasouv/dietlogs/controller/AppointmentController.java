@@ -75,4 +75,9 @@ public class AppointmentController {
         return appointmentService.tomorrowsAppointments();
     }
 
+    @GetMapping("/appointments/count")
+    public int count() {
+        return appointmentService.count();
+    }
+
 }

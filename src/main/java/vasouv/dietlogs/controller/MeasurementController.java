@@ -47,4 +47,9 @@ public class MeasurementController {
         measurementService.remove(mid);
     }
 
+    @GetMapping("count")
+    public int countByPersonID(@PathVariable int id) {
+        return measurementService.countByPersonID(id);
+    }
+
 }
