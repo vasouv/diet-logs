@@ -15,7 +15,7 @@ public class MeasurementService {
 
     @Autowired
     private MeasurementRepository measurementRepository;
-    
+
     @Autowired
     private BMICalculator bMICalculator;
 
@@ -32,9 +32,13 @@ public class MeasurementService {
         measurement.setBmi(bMICalculator.calculate(measurement.getWeightkg(), measurement.getPerson().getHeight()));
         measurementRepository.save(measurement);
     }
-    
-    public void remove(int id){
+
+    public void remove(int id) {
         measurementRepository.deleteById(id);
+    }
+
+    public int countByPersonID(int id) {
+        return measurementRepository.findByPersonId(id).size();
     }
 
 }

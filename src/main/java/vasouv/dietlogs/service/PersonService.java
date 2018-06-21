@@ -45,4 +45,8 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
+    public int count() {
+        return (int) personRepository.count();
+    }
+
 }

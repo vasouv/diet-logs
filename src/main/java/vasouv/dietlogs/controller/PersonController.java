@@ -49,4 +49,9 @@ public class PersonController {
         personService.delete(id);
     }
 
+    @GetMapping("count")
+    public int count() {
+        return personService.count();
+    }
+
 }
