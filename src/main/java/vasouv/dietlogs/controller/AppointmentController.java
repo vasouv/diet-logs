@@ -42,7 +42,7 @@ public class AppointmentController {
 
     @GetMapping("/persons/{personID}/appointment")
     public Appointment findByPersonID(@PathVariable int personID) {
-        return appointmentService.findByPersonID(personID).get();
+        return appointmentService.findByPersonID(personID).orElse(new Appointment());
     }
 
     @PostMapping("/persons/{personID}/appointment")
